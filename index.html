@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retirement, College & Home Equity Calculator</title>
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #0d6efd;
+    }
+    fieldset {
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    legend {
+      width: auto;
+      padding: 0 10px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0d6efd;
+    }
+    .result {
+      background: #e9f7ef;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Retirement Calculator</h1>
+    <form id="calcForm">
+      <!-- Retirement Parameters -->
+      <fieldset>
+        <legend>Retirement Parameters</legend>
+        <div class="mb-3">
+          <label for="currentAge" class="form-label">Current Age:</label>
+          <input type="number" class="form-control" id="currentAge" value="40" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="retirementAge" class="form-label">Retirement Age:</label>
+          <input type="number" class="form-control" id="retirementAge" value="65" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="retirementTarget" class="form-label">Retirement Target ($):</label>
+          <input type="number" class="form-control" id="retirementTarget" value="3000000" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="investmentReturn" class="form-label">Annual Investment Return (%):</label>
+          <input type="number" class="form-control" id="investmentReturn" value="5" step="0.1" min="0" required />
+        </div>
+      </fieldset>
+      
+      <!-- College Funding Parameters -->
+      <fieldset>
+        <legend>College Funding</legend>
+        <div class="mb-3">
+          <label for="collegeExpenseChild1" class="form-label">College Expense for Child 1 ($):</label>
+          <input type="number" class="form-control" id="collegeExpenseChild1" value="200000" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="child1Age" class="form-label">Child 1 Current Age:</label>
+          <input type="number" class="form-control" id="child1Age" value="7" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="collegeExpenseChild2" class="form-label">College Expense for Child 2 ($):</label>
+          <input type="number" class="form-control" id="collegeExpenseChild2" value="200000" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="child2Age" class="form-label">Child 2 Current Age:</label>
+          <input type="number" class="form-control" id="child2Age" value="5" min="0" required />
+        </div>
+      </fieldset>
+      
+      <!-- Home Equity Parameters -->
+      <fieldset>
+        <legend>Home Equity</legend>
+        <div class="mb-3">
+          <label for="homeEquity" class="form-label">Current Home Equity ($):</label>
+          <input type="number" class="form-control" id="homeEquity" value="300000" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="mortgageOutstanding" class="form-label">Mortgage Outstanding ($):</label>
+          <input type="number" class="form-control" id="mortgageOutstanding" value="400000" min="0" required />
+        </div>
+        <div class="mb-3">
+          <label for="homeAppreciation" class="form-label">Home Appreciation Rate (%):</label>
+          <input type="number" class="form-control" id="homeAppreciation" value="2" step="0.1" min="0" required />
+        </div>
+      </fieldset>
+      
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+      </div>
+    </form>
+    
+    <div id="result" class="result"></div>
+  </div>
+  
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    function calculate() {
+      // Retrieve and parse input values
+      const currentAge = parseFloat(document.getElementById('currentAge').value);
+      const retirementAge = parseFloat(document.getElementById('retirementAge').value);
+      const retirementTarget = parseFloat(document.getElementById('retirementTarget').value);
+      const investmentReturn = parseFloat(document.getElementById('investmentReturn').value);
+      
+      const collegeExpenseChild1 = parseFloat(document.getElementById('collegeExpenseChild1').value);
+      const child1Age = parseFloat(document.getElementById('child1Age').value);
+      const collegeExpenseChild2 = parseFloat(document.getElementById('collegeExpenseChild2').value);
+      const child2Age = parseFloat(document.getElementById('child2Age').value);
+      
+      const homeEquity = parseFloat(document.getElementById('homeEquity').value);
+      const mortgageOutstanding = parseFloat(document.getElementById('mortgageOutstanding').value);
+      const homeAppreciation = parseFloat(document.getElementById('homeAppreciation').value);
+      
+      // Calculate key factors
+      const yearsToRetirement = retirementAge - currentAge;
+      const investmentRate = investmentReturn / 100;
+      
+      // Calculate college expense growth factors
+      const child1YearsUntilCollege = Math.max(0, 18 - child1Age);
+      const growthFactorChild1 = Math.pow(1 + investmentRate, yearsToRetirement - child1YearsUntilCollege);
+      const grownCollegeExpenseChild1 = collegeExpenseChild1 * growthFactorChild1;
+      
+      const child2YearsUntilCollege = Math.max(0, 18 - child2Age);
+      const growthFactorChild2 = Math.pow(1 + investmentRate, yearsToRetirement - child2YearsUntilCollege);
+      const grownCollegeExpenseChild2 = collegeExpenseChild2 * growthFactorChild2;
+      
+      const totalGrownCollegeExpenses = grownCollegeExpenseChild1 + grownCollegeExpenseChild2;
+      
+      // Calculate required liquid savings today (without home equity)
+      const requiredLiquidFuture = retirementTarget + totalGrownCollegeExpenses;
+      const futureValueFactor = Math.pow(1 + investmentRate, yearsToRetirement);
+      const requiredLiquidToday = requiredLiquidFuture / futureValueFactor;
+      
+      // Calculate home equity: future home value and its present value
+      const homeTotal = homeEquity + mortgageOutstanding;
+      const homeAppRate = homeAppreciation / 100;
+      const futureHomeValue = homeTotal * Math.pow(1 + homeAppRate, yearsToRetirement);
+      const pvHome = futureHomeValue / futureValueFactor;
+      
+      // Calculate additional liquid savings needed today
+      let additionalLiquidNeeded = requiredLiquidToday - pvHome;
+      if (additionalLiquidNeeded < 0) additionalLiquidNeeded = 0;
+      
+      // Display the results
+      document.getElementById('result').innerHTML = `
+        <h2 class="text-center text-success">Results</h2>
+        <p><strong>Years to Retirement:</strong> ${yearsToRetirement.toFixed(1)} years</p>
+        <p><strong>Total Grown College Expenses:</strong> $${totalGrownCollegeExpenses.toFixed(2)}</p>
+        <p><strong>Required Liquid Savings Today (without home equity):</strong> $${requiredLiquidToday.toFixed(2)}</p>
+        <p><strong>Present Value of Future Home Proceeds:</strong> $${pvHome.toFixed(2)}</p>
+        <p><strong>Additional Liquid Savings Needed Today:</strong> $${additionalLiquidNeeded.toFixed(2)}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
